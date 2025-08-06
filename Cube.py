@@ -87,6 +87,14 @@ class R_cube:
         return R_cube(og_up, og_left, og_front, og_right, og_back, og_down)
 
 
+    def U(self):
+        original = self.deep_cpy_cube()
+        for i in range(3):
+            self.left_face[0][i] = original.front_face[0][i]
+            self.back_face[0][i] = original.left_face[0][i]
+            self.right_face[0][i] = original.back_face[0][i]
+            self.front_face[0][i] = original.right_face[0][i]
+
     def Uprime(self):
         original = self.deep_cpy_cube()
         for i in range(3):
@@ -95,13 +103,21 @@ class R_cube:
             self.back_face[0][i] = original.right_face[0][i]
             self.left_face[0][i] = original.back_face[0][i]
 
-    def U(self):
+    def D(self):
         original = self.deep_cpy_cube()
         for i in range(3):
-            self.left_face[0][i] = original.front_face[0][i]
-            self.back_face[0][i] = original.left_face[0][i]
-            self.right_face[0][i] = original.back_face[0][i]
-            self.front_face[0][i] = original.right_face[0][i]
+            self.front_face[2][i] = original.left_face[2][i]
+            self.right_face[2][i] = original.front_face[2][i]
+            self.back_face[2][i] = original.right_face[2][i]
+            self.left_face[2][i] = original.back_face[2][i]
+
+    def Dprime(self):
+        original = self.deep_cpy_cube()
+        for i in range(3):
+            self.left_face[2][i] = original.front_face[2][i]
+            self.back_face[2][i] = original.left_face[2][i]
+            self.right_face[2][i] = original.back_face[2][i]
+            self.front_face[2][i] = original.right_face[2][i]
 
 class Color(Enum):
     W = 1

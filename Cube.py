@@ -95,6 +95,18 @@ class R_cube:
             self.right_face[0][i] = original.back_face[0][i]
             self.front_face[0][i] = original.right_face[0][i]
 
+    #     rotate the top clockwise
+
+        self.up_face[0][0] = original.up_face[2][0]
+        self.up_face[0][1] = original.up_face[1][0]
+        self.up_face[0][2] = original.up_face[0][0]
+        self.up_face[1][0] = original.up_face[2][1]
+        self.up_face[2][0] = original.up_face[2][2]
+        self.up_face[1][2] = original.up_face[0][1]
+        self.up_face[2][1] = original.up_face[1][2]
+        self.up_face[2][2] = original.up_face[0][2]
+
+
     def Uprime(self):
         original = self.deep_cpy_cube()
         for i in range(3):
@@ -102,6 +114,17 @@ class R_cube:
             self.right_face[0][i] = original.front_face[0][i]
             self.back_face[0][i] = original.right_face[0][i]
             self.left_face[0][i] = original.back_face[0][i]
+
+            #     rotate the top counter-clockwise
+
+            self.up_face[2][0] = original.up_face[0][0]
+            self.up_face[1][0] = original.up_face[0][1]
+            self.up_face[0][0] = original.up_face[0][2]
+            self.up_face[2][1] = original.up_face[1][0]
+            self.up_face[2][2] = original.up_face[2][0]
+            self.up_face[0][1] = original.up_face[1][2]
+            self.up_face[1][2] = original.up_face[2][1]
+            self.up_face[0][2] = original.up_face[2][2]
 
     def D(self):
         original = self.deep_cpy_cube()
@@ -111,6 +134,17 @@ class R_cube:
             self.back_face[2][i] = original.right_face[2][i]
             self.left_face[2][i] = original.back_face[2][i]
 
+            #     rotate the bottom clockwise
+
+            self.down_face[0][0] = original.down_face[2][0]
+            self.down_face[0][1] = original.down_face[1][0]
+            self.down_face[0][2] = original.down_face[0][0]
+            self.down_face[1][0] = original.down_face[2][1]
+            self.down_face[2][0] = original.down_face[2][2]
+            self.down_face[1][2] = original.down_face[0][1]
+            self.down_face[2][1] = original.down_face[1][2]
+            self.down_face[2][2] = original.down_face[0][2]
+
     def Dprime(self):
         original = self.deep_cpy_cube()
         for i in range(3):
@@ -118,6 +152,19 @@ class R_cube:
             self.back_face[2][i] = original.left_face[2][i]
             self.right_face[2][i] = original.back_face[2][i]
             self.front_face[2][i] = original.right_face[2][i]
+
+            #     rotate the bottom counter-clockwise
+
+            self.down_face[2][0] = original.down_face[0][0]
+            self.down_face[1][0] = original.down_face[0][1]
+            self.down_face[0][0] = original.down_face[0][2]
+            self.down_face[2][1] = original.down_face[1][0]
+            self.down_face[2][2] = original.down_face[2][0]
+            self.down_face[0][1] = original.down_face[1][2]
+            self.down_face[1][2] = original.down_face[2][1]
+            self.down_face[0][2] = original.down_face[2][2]
+
+
 
 class Color(Enum):
     W = 1

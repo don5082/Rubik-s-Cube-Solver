@@ -57,8 +57,7 @@ class R_cube:
                 print(self.right_face[j][i].name, end=' ')
 
             print("   ", end='')
-            for i in range(3):
-                print(self.back_face[j][i].name, end=' ')
+
 
         print()
         print()
@@ -74,6 +73,16 @@ class R_cube:
                 print(self.down_face[j][i].name, end=' ')
             print()
 
+        print()
+
+        for j in range(3):
+            for i in range(9):
+                print(" ", end='')
+            for i in range(3):
+                print(self.back_face[j][i].name, end=' ')
+            print()
+        # print()
+        print("------------------------------")
 
 
     def deep_cpy_cube(self):
@@ -91,8 +100,8 @@ class R_cube:
         original = self.deep_cpy_cube()
         for i in range(3):
             self.left_face[0][i] = original.front_face[0][i]
-            self.back_face[0][i] = original.left_face[0][i]
-            self.right_face[0][i] = original.back_face[0][i]
+            self.back_face[2][2 - i] = original.left_face[0][i] # potential bug
+            self.right_face[0][i] = original.back_face[2][2-i] # potential bug
             self.front_face[0][i] = original.right_face[0][i]
 
     #     rotate the top clockwise
@@ -112,8 +121,8 @@ class R_cube:
         for i in range(3):
             self.front_face[0][i] = original.left_face[0][i]
             self.right_face[0][i] = original.front_face[0][i]
-            self.back_face[0][i] = original.right_face[0][i]
-            self.left_face[0][i] = original.back_face[0][i]
+            self.back_face[2][2 - i] = original.right_face[0][i]
+            self.left_face[0][i] = original.back_face[2][2 - i]
 
             #     rotate the top counter-clockwise
 
@@ -131,8 +140,8 @@ class R_cube:
         for i in range(3):
             self.front_face[2][i] = original.left_face[2][i]
             self.right_face[2][i] = original.front_face[2][i]
-            self.back_face[2][i] = original.right_face[2][i]
-            self.left_face[2][i] = original.back_face[2][i]
+            self.back_face[0][2 - i] = original.right_face[2][i]
+            self.left_face[2][i] = original.back_face[0][2 - i]
 
             #     rotate the bottom clockwise
 
@@ -149,8 +158,8 @@ class R_cube:
         original = self.deep_cpy_cube()
         for i in range(3):
             self.left_face[2][i] = original.front_face[2][i]
-            self.back_face[2][i] = original.left_face[2][i]
-            self.right_face[2][i] = original.back_face[2][i]
+            self.back_face[0][i] = original.left_face[2][i]
+            self.right_face[2][i] = original.back_face[0][i]
             self.front_face[2][i] = original.right_face[2][i]
 
             #     rotate the bottom counter-clockwise
@@ -163,6 +172,24 @@ class R_cube:
             self.down_face[0][1] = original.down_face[1][2]
             self.down_face[1][2] = original.down_face[2][1]
             self.down_face[0][2] = original.down_face[2][2]
+
+    def R(self):
+        original = self.deep_cpy_cube()
+        for i in range(3):
+            self.front_face[i][2] = original.down_face[i][2]
+            self.down_face[i][2] = original.back_face[i][2]
+            self.back_face[i][2] = original.up_face[i][2]
+            self.up_face[i][2] = original.front_face[i][2]
+
+#         Rotate the right clockwise
+        self.right_face[0][0] = original.right_face[2][0]
+        self.right_face[0][1] = original.right_face[1][0]
+        self.right_face[0][2] = original.right_face[0][0]
+        self.right_face[1][0] = original.right_face[2][1]
+        self.right_face[2][0] = original.right_face[2][2]
+        self.right_face[1][2] = original.right_face[0][1]
+        self.right_face[2][1] = original.right_face[1][2]
+        self.right_face[2][2] = original.right_face[0][2]
 
 
 

@@ -158,8 +158,8 @@ class R_cube:
         original = self.deep_cpy_cube()
         for i in range(3):
             self.left_face[2][i] = original.front_face[2][i]
-            self.back_face[0][i] = original.left_face[2][i]
-            self.right_face[2][i] = original.back_face[0][i]
+            self.back_face[0][2 - i] = original.left_face[2][i]
+            self.right_face[2][i] = original.back_face[0][2 - i]
             self.front_face[2][i] = original.right_face[2][i]
 
             #     rotate the bottom counter-clockwise
@@ -191,6 +191,23 @@ class R_cube:
         self.right_face[2][1] = original.right_face[1][2]
         self.right_face[2][2] = original.right_face[0][2]
 
+    def Rprime(self):
+        original = self.deep_cpy_cube()
+        for i in range(3):
+            self.front_face[i][2] = original.up_face[i][2]
+            self.down_face[i][2] = original.front_face[i][2]
+            self.back_face[i][2] = original.down_face[i][2]
+            self.up_face[i][2] = original.back_face[i][2]
+
+        # rotate right face counter-clockwise
+        self.right_face[2][0] = original.right_face[0][0]
+        self.right_face[1][0] = original.right_face[0][1]
+        self.right_face[0][0] = original.right_face[0][2]
+        self.right_face[2][1] = original.right_face[1][0]
+        self.right_face[2][2] = original.right_face[2][0]
+        self.right_face[0][1] = original.right_face[1][2]
+        self.right_face[1][2] = original.right_face[2][1]
+        self.right_face[0][2] = original.right_face[2][2]
 
 
 class Color(Enum):

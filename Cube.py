@@ -209,6 +209,23 @@ class R_cube:
         self.right_face[1][2] = original.right_face[2][1]
         self.right_face[0][2] = original.right_face[2][2]
 
+    def B(self):
+        original = self.deep_cpy_cube()
+        for i in range(3):
+            self.right_face[i][2] = original.down_face[i][2]
+            self.down_face[0][i] = original.left_face[i][2]
+            self.left_face[i][0] = original.up_face[i][2]
+            self.up_face[0][i] = original.right_face[i][2]
+            #         Rotate the back clockwise
+            self.back_face[0][0] = original.back_face[2][0]
+            self.back_face[0][1] = original.back_face[1][0]
+            self.back_face[0][2] = original.back_face[0][0]
+            self.back_face[1][0] = original.back_face[2][1]
+            self.back_face[2][0] = original.back_face[2][2]
+            self.back_face[1][2] = original.back_face[0][1]
+            self.back_face[2][1] = original.back_face[1][2]
+            self.back_face[2][2] = original.back_face[0][2]
+
 
 class Color(Enum):
     W = 1

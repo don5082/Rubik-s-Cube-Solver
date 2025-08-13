@@ -4,7 +4,7 @@ from enum import Enum
 
 class R_cube:
 
-    def __init__(self, up_face=None, left_face=None, front_face=None, right_face=None, back_face=None, down_face=None):
+    def __init__(self, up_face=None, left_face=None, front_face=None, right_face=None, down_face=None, back_face=None):
 
         # Defualt Values
         if up_face is None:
@@ -93,7 +93,7 @@ class R_cube:
         og_back = copy.deepcopy(self.back_face)
         og_down = copy.deepcopy(self.down_face)
 
-        return R_cube(og_up, og_left, og_front, og_right, og_back, og_down)
+        return R_cube(og_up, og_left, og_front, og_right, og_down, og_back)
 
 
     def U(self):
@@ -209,11 +209,17 @@ class R_cube:
         self.right_face[1][2] = original.right_face[2][1]
         self.right_face[0][2] = original.right_face[2][2]
 
+    def L(self):
+        pass
+
+    def Lprime(self):
+        pass
+
     def B(self):
         original = self.deep_cpy_cube()
         for i in range(3):
             self.right_face[i][2] = original.down_face[i][2]
-            self.down_face[0][i] = original.left_face[i][2]
+            self.down_face[2][i] = original.left_face[i][0]
             self.left_face[i][0] = original.up_face[i][2]
             self.up_face[0][i] = original.right_face[i][2]
             #         Rotate the back clockwise
@@ -226,6 +232,14 @@ class R_cube:
             self.back_face[2][1] = original.back_face[1][2]
             self.back_face[2][2] = original.back_face[0][2]
 
+    def Bprime(self):
+        pass
+
+    def F(self):
+        pass
+
+    def Fprime(self):
+        pass
 
 class Color(Enum):
     W = 1
